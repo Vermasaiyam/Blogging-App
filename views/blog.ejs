@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head") %>
+        <title>Homepage</title>
+</head>
+
+<body>
+    <%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+        <h1 style="margin: 10px 20px;"><u><%= blog.title %></u></h1>
+        <div class="container flex flex-row gap-4">
+            <img src="<%= blog.coverImageUrl %>" alt="<%= blog.coverImageUrl %>" width="600px" height="600px">
+            <p style="font-size: 30px; margin: 20px 40px;"><%= blog.body %></p>
+        </div>
+    </div>
+
+    <%- include('./partials/scripts') %>
+</body>
+
+</html>

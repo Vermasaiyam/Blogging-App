@@ -22,6 +22,15 @@ router.get('/add-new', (req, res) => {
         user: req.user,
     })
 })
+
+router.get('/:id', async (req, res)=>{
+    const blog = await Blog.findById(req.params.id);
+    return res.render("blog", {
+        user: req.user,
+        blog,
+    })
+})
+
 router.post('/', upload.single('coverImage'), async (req, res) => {
     // console.log(req.body);
     // console.log(req.file);
