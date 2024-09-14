@@ -32,11 +32,11 @@ router.post('/signup', async (req, res) => {
         email,
         password,
     })
-    res.redirect('/');
+    res.redirect('/user/signin');
 })
 
 router.get('/logout', (req, res)=>{
-    res.clearCookie('token').redirect('/');
+    res.clearCookie('token').redirect('/user/signin');
 })
 
 module.exports = router;

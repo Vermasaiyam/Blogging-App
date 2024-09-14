@@ -8,19 +8,41 @@
 
 <body>
     <%- include('./partials/nav') %>
-
-        <div class="container mt-4 flex flex-wrap">
-            <% blogs.forEach(blog=> { %>
-                <div class="card" style="width: 18rem; margin: 0px 20px;">
-                    <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt="<%= blog.title %>" height="250px" width="150px">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= blog.title %></h5>
-                        <p class="card-text"><%= (blog.body).slice(0,30) %>...</p>
-                        <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read</a>
-                    </div>
+        <% if (locals.user === null) { %>
+            <div class="container mt-4">
+                <div class="alert alert-info" role="alert">
+                    Please login to create and view blogs.
                 </div>
-            <% }) %>
-        </div>
+            </div>
+        <% } else { %>
+        
+            <div class="container mt-4 flex flex-wrap">
+                <% if (blogs.length === 0) { %>
+                    <div class="container">
+                        <div class="alert alert-primary" role="alert">
+                            No Blogs Created. Add some blogs to view.
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="container flex flex-wrap">
+                        <% if (locals.blogs) { %>
+                            <% blogs.forEach(blog=> { %>
+                                <div class="card" style="width: 18rem; margin: 20px 15px;">
+                                    <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt="<%= blog.title %>" height="250px" width="150px">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%= blog.title %></h5>
+                                        <p class="card-text"><%= (blog.body).slice(0,30) %>...</p>
+                                        <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read</a>
+                                    </div>
+                                </div>
+                            <% }) %>
+    
+                        <% } %>
+                    </div>
+                <% }%>
+            </div>
+        <% } %>
+         
 
     <%- include('./partials/scripts') %>
 </body>

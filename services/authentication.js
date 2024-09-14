@@ -5,6 +5,7 @@ const secret = "$aiyam-App@123";
 function createTokenForUser(user){
     const payload = {
         _id: user._id,
+        fullName: user.fullName,
         email: user.email,
         profileImageUrl: user.profileImageUrl,
         role: user.role,
@@ -14,8 +15,13 @@ function createTokenForUser(user){
 }
 
 function validateToken(token){
-    const payload = JWT.verify(token, secret);
-    return payload;
+    if (!token) return null;
+    try{
+        return JWT.verify(token, secret);
+    }
+    catch(error){
+        return null;
+    }
 }
 
 module.exports = {
