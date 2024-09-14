@@ -9,11 +9,37 @@
 <body>
     <%- include('./partials/nav') %>
 
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4">
         <h1 style="margin: 10px 20px;"><u><%= blog.title %></u></h1>
         <div class="container flex flex-row gap-4">
             <img src="<%= blog.coverImageUrl %>" alt="<%= blog.coverImageUrl %>" width="600px" height="600px">
             <p style="font-size: 30px; margin: 20px 40px;"><%= blog.body %></p>
+        </div>
+
+        <div class="container mt-4 mb-4">
+            <img src="<%= blog.createdBy.profileImageUrl %>" alt="<%= blog.createdBy.fullName %>'s Profile Photo" width="70px">
+            <%= blog.createdBy.fullName %>
+        </div>
+
+        <div class="container mt-3">
+            <h1>Comments (<%= comments.length %>)</h1>
+            <% if (locals.user) { %>
+                <form method="post" action="/blog/comment/<%= blog._id %>">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="content" name="content" placeholder="Enter your comment...">
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-success">Add</button>
+                </form>
+            <% } %>
+            <div class="mt-4">
+                <% comments.forEach(comment => { %>
+                    <div>
+                        <img src="<%= comment.createdBy.profileImageUrl %>" alt="<%= blog.createdBy.fullName %>'s Profile Photo" width="60px">
+                        <%= comment.createdBy.fullName %>
+                        <p style="font-size: 18px; padding: 0px 20px;"><%= comment.content %></p>
+                    </div>
+                <% }) %>
+            </div>
         </div>
     </div>
 

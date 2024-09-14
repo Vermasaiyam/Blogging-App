@@ -26,6 +26,17 @@ app.use(express.static(path.resolve('./public')));
 app.get('/', async (req, res)=>{
     console.log(req.user);
     if (req.user === null) return res.render("home",{user: null});
+    // const allBlogs = await Blog.find({createdBy: req.user._id});
+    const allBlogs = await Blog.find({});
+    
+    res.render("home", {
+        user: req.user,
+        blogs: allBlogs,
+    });
+})
+app.get('/blogs', async (req, res)=>{
+    console.log(req.user);
+    if (req.user === null) return res.render("home",{user: null});
     const allBlogs = await Blog.find({createdBy: req.user._id});
     // const allBlogs = await Blog.find({});
     
