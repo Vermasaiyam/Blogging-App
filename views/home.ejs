@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <%- include("./partials/head") %>
-    <title>Homepage</title>
+        <title>Homepage</title>
 </head>
+
 <body>
     <%- include('./partials/nav') %>
-    
+
+        <div class="container mt-3 flex flex-wrap">
+            <% blogs.forEach(blog=> { %>
+                <div class="card" style="width: 18rem; margin: 0px 15px;">
+                    <img src="<%= blog.coverImageUrl %>" class="card-img-top" alt="<%= blog.title %>" height="250px" width="150px">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= blog.title %></h5>
+                        <p class="card-text"><%= (blog.body).slice(0,20) %>...</p>
+                        <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
 
     <%- include('./partials/scripts') %>
 </body>
+
 </html>
